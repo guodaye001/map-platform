@@ -3,7 +3,6 @@ package com.map.platform.commons.service.impl;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import com.map.platform.commons.utils.Pagenation;
  * @author Guosw
  * @date 2016年4月17日 下午11:17:31
  */
-@Service("baseService")
 public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     protected static Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
     @Autowired

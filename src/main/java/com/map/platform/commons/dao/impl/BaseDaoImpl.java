@@ -3,7 +3,6 @@ package com.map.platform.commons.dao.impl;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Repository;
 
 import com.map.platform.commons.dao.BaseDao;
 import com.map.platform.commons.bean.BaseModel;
@@ -16,7 +15,6 @@ import java.util.Map;
  * @author Guosw
  * 2016年4月17日23:06:59
  */
-@Repository("baseDao")
 public class BaseDaoImpl<T extends BaseModel> extends SqlSessionDaoSupport implements BaseDao<T> {
 	protected Logger log = LoggerFactory.getLogger(BaseDaoImpl.class);
 	
