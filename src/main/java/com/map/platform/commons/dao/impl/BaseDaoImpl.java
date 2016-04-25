@@ -4,7 +4,7 @@ import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.map.platform.commons.dao.BaseDao;
+import com.map.platform.commons.dao.IBaseDao;
 import com.map.platform.commons.bean.BaseModel;
 
 import java.util.List;
@@ -15,7 +15,7 @@ import java.util.Map;
  * @author Guosw
  * 2016年4月17日23:06:59
  */
-public class BaseDaoImpl<T extends BaseModel> extends SqlSessionDaoSupport implements BaseDao<T> {
+public class BaseDaoImpl<T extends BaseModel> extends SqlSessionDaoSupport implements IBaseDao<T> {
 	protected Logger log = LoggerFactory.getLogger(BaseDaoImpl.class);
 	
 	/**
@@ -227,34 +227,6 @@ public class BaseDaoImpl<T extends BaseModel> extends SqlSessionDaoSupport imple
 			throw e;
 		}
 		return result;
-	}
-	/**
-	 * 查询数量
-	 * @param classMethod mybatis配置文件里面对应的命名空间+要执行的sql语句id
-	 * @param entity 封装数据的实体
-	 * @return 返回查询结果
-	 * @throws Exception 抛出所有异常
-	 */
-	@SuppressWarnings("unchecked")
-	public T getCountObject(String classMethod, T entity) throws Exception {
-		Object result;
-		try {
-            log.info("dao getCount!"+classMethod);
-			result = this.getSqlSession().selectOne(classMethod,entity);
-			if(result instanceof Integer){
-				entity.setTotalNumber(String.valueOf(result));
-			}else{
-				entity.setTotalAmount(((T)result).getTotalAmount());
-				entity.setTotalNumber(((T)result).getTotalNumber());
-
-                log.debug("dao getCount result=" + entity.getTotalAmount());
-			}
-            log.debug("dao getCount result=" + entity.getTotalNumber());
-		} catch (Exception e) {
-			log.error("dao getCount:",e);
-			throw e;
-		}
-		return entity;
 	}
 
 	@Override

@@ -3,14 +3,12 @@ package com.map.platform.commons.service;
 import java.util.List;
 import java.util.Map;
 
-import com.map.platform.commons.utils.Pagenation;
-
 /**
  * Service基类接口封装CRUD方法
  * @author Guosw
  * @date 2016年4月17日 下午11:25:48
  */
-public interface BaseService<T> {
+public interface IBaseService<T> {
 	/**
 	 * 增加
 	 * @param classMethod mybatis配置文件里面对应的命名空间+要执行的sql语句id
@@ -81,16 +79,6 @@ public interface BaseService<T> {
 	 * @throws Exception 抛出所有异常
 	 */
 	public int getCount(String classMethod,T entity) throws Exception;
-	
-	 /** 分页查询
-	 * @param queryClassMethod mybatis配置文件里面对应的命名空间+要执行的sql语句id
-	 * @param countClassMethod mybatis配置文件里面对应的命名空间+要执行的sql语句id
-	 * @param entity 封装数据的实体
-	 * @return 返回查询结果
-	 * @throws Exception 抛出所有异常
-	 */
-	public Pagenation queryPage(String queryClassMethod,String countClassMethod,T entity) throws Exception;
-	public Pagenation queryPageForDownload(String queryClassMethod,String countClassMethod,T entity,boolean firstFlag) throws Exception;
 	
 	/**
 	 * 获取seq值

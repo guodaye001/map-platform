@@ -9,7 +9,7 @@ import java.util.Map;
  * @author Guosw
  * @date 2016年4月17日 下午11:16:57
  */
-public interface BaseDao<T> {
+public interface IBaseDao<T> {
     /**
      * 增加
      *
@@ -90,8 +90,6 @@ public interface BaseDao<T> {
      * @throws Exception 抛出所有异常
      */
     public int getCount(String classMethod, T entity) throws Exception;
-
-    public T getCountObject(String classMethod, T entity) throws Exception;
 
     /**
      * 获取seq值

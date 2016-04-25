@@ -7,19 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Map;
 import com.map.platform.commons.bean.BaseModel;
-import com.map.platform.commons.dao.BaseDao;
-import com.map.platform.commons.service.BaseService;
-import com.map.platform.commons.utils.Pagenation;
+import com.map.platform.commons.dao.IBaseDao;
+import com.map.platform.commons.service.IBaseService;
 
 /**
  * Service基类实现类封装CRUD方法
  * @author Guosw
  * @date 2016年4月17日 下午11:17:31
  */
-public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
+public class BaseServiceImpl<T extends BaseModel> implements IBaseService<T> {
     protected static Logger log = LoggerFactory.getLogger(BaseServiceImpl.class);
     @Autowired
-    BaseDao<T> baseDao;
+    IBaseDao<T> baseDao;
 
     /**
      * 增加
@@ -115,40 +114,6 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
      */
     public int getCount(String classMethod, T entity) throws Exception {
         return baseDao.getCount(classMethod, entity);
-    }
-
-
-    /**
-     * 分页查询
-     *
-     * @param queryClassMethod mybatis配置文件里面对应的命名空间+要执行的sql语句id
-     * @param countClassMethod mybatis配置文件里面对应的命名空间+要执行的sql语句id
-     * @param entity           封装数据的实体
-     * @return 返回查询结果
-     * @throws Exception 抛出所有异常
-     */
-    public Pagenation queryPage(String queryClassMethod, String countClassMethod, T entity) throws Exception {
-		int count=baseDao.getCount(countClassMethod, entity);
-        baseDao.getCountObject(countClassMethod, entity);
-
-        Pagenation pagenation = new Pagenation(entity.getPageSize(), entity.getPageNum().intValue(), count);
-        entity.setStartRow(pagenation.getStartRow());
-        pagenation.setList(baseDao.getAllList(queryClassMethod, entity));
-        return pagenation;
-    }
-
-    public Pagenation queryPageForDownload(String queryClassMethod, String countClassMethod, T entity, boolean firstFlag) throws Exception {
-        int count = 0;
-    	if (firstFlag) {
-			baseDao.getCountObject(countClassMethod, entity);
-            entity.setRowNum(0);
-        } else {
-            count = entity.getRowNum();
-        }
-        Pagenation pagenation = new Pagenation(entity.getPageSize(), entity.getPageNum().intValue(), count);
-        entity.setStartRow(pagenation.getStartRow());
-        pagenation.setList(baseDao.getAllList(queryClassMethod, entity));
-        return pagenation;
     }
 
     @Override
