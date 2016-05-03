@@ -1,5 +1,6 @@
 package com.map.platform.commons.dao.impl;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.support.SqlSessionDaoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,8 @@ import com.map.platform.commons.bean.BaseModel;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 /**
  * Dao基类实现类封装CRUD方法
  * @author Guosw
@@ -17,6 +20,10 @@ import java.util.Map;
  */
 public class BaseDaoImpl<T extends BaseModel> extends SqlSessionDaoSupport implements IBaseDao<T> {
 	protected Logger log = LoggerFactory.getLogger(BaseDaoImpl.class);
+	@Resource  
+    public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory){  
+        super.setSqlSessionFactory(sqlSessionFactory);  
+    }
 	
 	/**
 	 * 增加
