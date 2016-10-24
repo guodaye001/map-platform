@@ -1,2 +1,0 @@
-# map-platform
-biyesheji
